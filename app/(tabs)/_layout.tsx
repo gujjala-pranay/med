@@ -1,15 +1,15 @@
-import { Tabs } from 'expo-router';
-
+import { Tabs } from "expo-router";
+import { Image } from "react-native";
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#2563EB',
-        tabBarInactiveTintColor: '#9CA3AF',
+        tabBarActiveTintColor: "#2563EB",
+        tabBarInactiveTintColor: "#9CA3AF",
         tabBarStyle: {
-          backgroundColor: '#FFFFFF',
-          borderTopWidth: 1,
-          borderTopColor: '#E5E7EB',
+          backgroundColor: "#FFFFFF",
+          borderTopWidth: 0.5,
+          borderTopColor: "#E5E7EB",
         },
         headerShown: false,
       }}
@@ -17,31 +17,76 @@ export default function TabLayout() {
       <Tabs.Screen
         name="dashboard"
         options={{
-          title: 'Home',
+          title: "Home",
+          tabBarIcon: ({ size }) => (
+            <Image
+              source={require("../assets/icons/home.png")}
+              style={{
+                width: size,
+                height: size,
+              }}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="upload"
         options={{
-          title: 'Upload',
+          title: "Upload",
+          tabBarIcon: ({ size }) => (
+            <Image
+              source={require("../assets/icons/upload.png")}
+              style={{
+                width: size,
+                height: size,
+              }}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="search"
         options={{
-          title: 'Search',
+          title: "Search",
+          tabBarIcon: ({ size }) => (
+            <Image
+              source={require("../assets/icons/search1.png")}
+              style={{
+                width: size,
+                height: size,
+              }}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="family"
         options={{
-          title: 'Family',
+          title: "Family",
+          tabBarIcon: ({ size }) => (
+            <Image
+              source={require("../assets/icons/family.png")}
+              style={{
+                width: size,
+                height: size,
+              }}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="reminders"
         options={{
-          title: 'Reminders',
+          title: "Reminders",
+          tabBarIcon: ({ size }) => (
+            <Image
+              source={require("../assets/icons/reminder.png")}
+              style={{
+                width: size,
+                height: size,
+              }}
+            />
+          ),
         }}
       />
     </Tabs>

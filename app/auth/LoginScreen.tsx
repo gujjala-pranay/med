@@ -1,13 +1,21 @@
-import { router } from 'expo-router';
-import { useState } from 'react';
-import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { router } from "expo-router";
+import { useState } from "react";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 interface LoginScreenProps {
   onLogin?: (mobileNumber: string) => void;
 }
 
 export default function LoginScreen({ onLogin }: LoginScreenProps) {
-  const [mobileNumber, setMobileNumber] = useState('');
+  const [mobileNumber, setMobileNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleContinue = () => {
@@ -20,21 +28,25 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
           onLogin(mobileNumber);
         } else {
           // Navigate using router with mobile number as query parameter
-          router.push(`/auth/otp?mobile=${encodeURIComponent(mobileNumber)}`);
+          router.push(
+            `/auth/OTPScreen?mobile=${encodeURIComponent(mobileNumber)}`,
+          );
         }
       }, 1000);
     }
   };
 
   return (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <View style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.title}>Welcome Back</Text>
-          <Text style={styles.subtitle}>Enter your mobile number to continue</Text>
+          <Text style={styles.subtitle}>
+            Enter your mobile number to continue
+          </Text>
         </View>
 
         <View style={styles.form}>
@@ -52,20 +64,24 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
             />
           </View>
           {mobileNumber.length > 0 && mobileNumber.length < 10 && (
-            <Text style={styles.errorText}>Please enter a valid 10-digit mobile number</Text>
+            <Text style={styles.errorText}>
+              Please enter a valid 10-digit mobile number
+            </Text>
           )}
         </View>
 
-        <Pressable 
+        <Pressable
           style={[
-            styles.button, 
-            mobileNumber.length === 10 && !isLoading ? styles.buttonActive : styles.buttonDisabled
+            styles.button,
+            mobileNumber.length === 10 && !isLoading
+              ? styles.buttonActive
+              : styles.buttonDisabled,
           ]}
           onPress={handleContinue}
           disabled={mobileNumber.length !== 10 || isLoading}
         >
           <Text style={styles.buttonText}>
-            {isLoading ? 'Sending OTP...' : 'Continue'}
+            {isLoading ? "Sending OTP..." : "Continue"}
           </Text>
         </Pressable>
 
@@ -82,87 +98,87 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
   },
   content: {
     flex: 1,
     padding: 24,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 48,
   },
   title: {
     fontSize: 28,
-    fontWeight: '700',
-    color: '#1F2937',
+    fontWeight: "700",
+    color: "#1F2937",
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: '#6B7280',
-    textAlign: 'center',
+    color: "#6B7280",
+    textAlign: "center",
   },
   form: {
     marginBottom: 32,
   },
   label: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#374151',
+    fontWeight: "600",
+    color: "#374151",
     marginBottom: 8,
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
-    borderColor: '#D1D5DB',
+    borderColor: "#D1D5DB",
     borderRadius: 12,
     paddingHorizontal: 16,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: "#F9FAFB",
   },
   countryCode: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#374151',
+    fontWeight: "600",
+    color: "#374151",
     marginRight: 8,
   },
   input: {
     flex: 1,
     fontSize: 16,
-    color: '#1F2937',
+    color: "#1F2937",
     paddingVertical: 16,
   },
   errorText: {
     fontSize: 12,
-    color: '#EF4444',
+    color: "#EF4444",
     marginTop: 4,
   },
   button: {
     paddingVertical: 16,
     borderRadius: 12,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 24,
   },
   buttonActive: {
-    backgroundColor: '#2563EB',
+    backgroundColor: "#2563EB",
   },
   buttonDisabled: {
-    backgroundColor: '#D1D5DB',
+    backgroundColor: "#D1D5DB",
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#FFFFFF',
+    fontWeight: "600",
+    color: "#FFFFFF",
   },
   footer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   footerText: {
     fontSize: 12,
-    color: '#6B7280',
-    textAlign: 'center',
+    color: "#6B7280",
+    textAlign: "center",
     lineHeight: 18,
   },
 });

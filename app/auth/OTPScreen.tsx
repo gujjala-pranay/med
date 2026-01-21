@@ -1,6 +1,6 @@
-import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 interface OTPScreenProps {
   mobileNumber?: string;
@@ -8,10 +8,14 @@ interface OTPScreenProps {
   onResendOTP?: () => void;
 }
 
-export default function OTPScreen({ mobileNumber: propMobileNumber, onVerify, onResendOTP }: OTPScreenProps) {
+export default function OTPScreen({
+  mobileNumber: propMobileNumber,
+  onVerify,
+  onResendOTP,
+}: OTPScreenProps) {
   const { mobile: paramMobile } = useLocalSearchParams();
-  const mobileNumber = propMobileNumber || (paramMobile as string) || '';
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const mobileNumber = propMobileNumber || (paramMobile as string) || "";
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(30);
   const [canResend, setCanResend] = useState(false);
 
@@ -42,13 +46,13 @@ export default function OTPScreen({ mobileNumber: propMobileNumber, onVerify, on
       }
 
       // Auto-verify when all digits are entered
-      if (newOTP.every(digit => digit.length === 1)) {
+      if (newOTP.every((digit) => digit.length === 1)) {
         setTimeout(() => {
           if (onVerify) {
-            onVerify(newOTP.join(''));
+            onVerify(newOTP.join(""));
           } else {
             // Navigate using router
-            router.push('/auth/pin');
+            router.push("/auth/PINSetupScreen");
           }
         }, 100);
       }
@@ -59,7 +63,7 @@ export default function OTPScreen({ mobileNumber: propMobileNumber, onVerify, on
     if (canResend) {
       setCanResend(false);
       setTimeLeft(30);
-      setOtp(['', '', '', '', '', '']);
+      setOtp(["", "", "", "", "", ""]);
       if (onResendOTP) {
         onResendOTP();
       }
@@ -97,7 +101,9 @@ export default function OTPScreen({ mobileNumber: propMobileNumber, onVerify, on
 
         <View style={styles.resendContainer}>
           <Text style={styles.resendText}>
-            {canResend ? "Didn't receive the code?" : `Resend code in ${timeLeft}s`}
+            {canResend
+              ? "Didn't receive the code?"
+              : `Resend code in ${timeLeft}s`}
           </Text>
           {canResend && (
             <Pressable onPress={handleResendOTP}>
@@ -119,65 +125,65 @@ export default function OTPScreen({ mobileNumber: propMobileNumber, onVerify, on
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
   },
   content: {
     flex: 1,
     padding: 24,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 48,
   },
   title: {
     fontSize: 28,
-    fontWeight: '700',
-    color: '#1F2937',
+    fontWeight: "700",
+    color: "#1F2937",
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: '#6B7280',
-    textAlign: 'center',
+    color: "#6B7280",
+    textAlign: "center",
     lineHeight: 24,
   },
   otpContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 32,
   },
   otpInput: {
     width: 45,
     height: 55,
     borderWidth: 2,
-    borderColor: '#D1D5DB',
+    borderColor: "#D1D5DB",
     borderRadius: 12,
     fontSize: 20,
-    fontWeight: '600',
-    color: '#1F2937',
-    backgroundColor: '#F9FAFB',
+    fontWeight: "600",
+    color: "#1F2937",
+    backgroundColor: "#F9FAFB",
   },
   resendContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 32,
   },
   resendText: {
     fontSize: 14,
-    color: '#6B7280',
+    color: "#6B7280",
     marginBottom: 8,
   },
   resendLink: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#2563EB',
+    fontWeight: "600",
+    color: "#2563EB",
   },
   footer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   footerText: {
     fontSize: 12,
-    color: '#9CA3AF',
-    textAlign: 'center',
+    color: "#9CA3AF",
+    textAlign: "center",
   },
 });
