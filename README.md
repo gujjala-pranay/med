@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# med
+# medvault application
 =======
 # Welcome to your Expo app 👋
 
