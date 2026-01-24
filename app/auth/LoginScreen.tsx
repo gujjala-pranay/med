@@ -9,6 +9,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { ArrowLeft, Phone } from "lucide-react-native";
 
 interface LoginScreenProps {
   onLogin?: (mobileNumber: string) => void;
@@ -43,6 +44,9 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
     >
       <View style={styles.content}>
         <View style={styles.header}>
+          <Pressable onPress={() => router.back()} style={styles.backButton}>
+            <ArrowLeft size={24} color="#1F2937" />
+          </Pressable>
           <Text style={styles.title}>Welcome Back</Text>
           <Text style={styles.subtitle}>
             Enter your mobile number to continue
@@ -52,6 +56,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
         <View style={styles.form}>
           <Text style={styles.label}>Mobile Number</Text>
           <View style={styles.inputContainer}>
+            <Phone size={20} color="#9CA3AF" style={styles.inputIcon} />
             <Text style={styles.countryCode}>+91</Text>
             <TextInput
               style={styles.input}
@@ -106,8 +111,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   header: {
-    alignItems: "center",
     marginBottom: 48,
+  },
+  backButton: {
+    marginBottom: 20,
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+  },
+  backButtonText: {
+    fontSize: 24,
+    color: "#1F2937",
   },
   title: {
     fontSize: 28,
@@ -137,6 +151,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingHorizontal: 16,
     backgroundColor: "#F9FAFB",
+  },
+  inputIcon: {
+    marginRight: 12,
   },
   countryCode: {
     fontSize: 16,

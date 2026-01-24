@@ -48,7 +48,7 @@ export default function Index() {
       } else if (isLoggedIn !== "true") {
         setAuthState("splash");
         setTimeout(() => {
-          router.replace("/auth/LoginScreen");
+          router.replace("/auth/AuthOptionsScreen");
         }, 500);
       } else {
         setAuthState("splash");
@@ -68,7 +68,7 @@ export default function Index() {
     await AsyncStorage.setItem("onboardingComplete", "true");
     setAuthState("splash"); // Show splash briefly before navigation
     setTimeout(() => {
-      router.replace("/auth/LoginScreen");
+      router.replace("/auth/AuthOptionsScreen");
     }, 1000); // 1 second delay before login
   };
 

@@ -7,7 +7,9 @@ export default function AuthLayout() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="LoginScreen" options={{ title: "Login" }} />
+      <Stack.Screen name="AuthOptionsScreen" options={{ title: "Welcome" }} />
+      <Stack.Screen name="LoginScreen" options={{ title: "Mobile Login" }} />
+      <Stack.Screen name="EmailLoginScreen" options={{ title: "Email Login" }} />
       <Stack.Screen name="OTPScreen" options={{ title: "OTP Verification" }} />
       <Stack.Screen name="PINSetupScreen" options={{ title: "PIN Setup" }} />
     </Stack>

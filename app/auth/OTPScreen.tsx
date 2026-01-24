@@ -1,6 +1,7 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { ArrowLeft } from "lucide-react-native";
 
 interface OTPScreenProps {
   mobileNumber?: string;
@@ -78,6 +79,9 @@ export default function OTPScreen({
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.header}>
+          <Pressable onPress={() => router.back()} style={styles.backButton}>
+            <ArrowLeft size={24} color="#1F2937" />
+          </Pressable>
           <Text style={styles.title}>Verify OTP</Text>
           <Text style={styles.subtitle}>
             We've sent a 6-digit code to {formatMobileNumber(mobileNumber)}
@@ -133,8 +137,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   header: {
-    alignItems: "center",
     marginBottom: 48,
+  },
+  backButton: {
+    marginBottom: 20,
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+  },
+  backButtonText: {
+    fontSize: 24,
+    color: "#1F2937",
   },
   title: {
     fontSize: 28,
